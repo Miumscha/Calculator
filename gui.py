@@ -1,4 +1,5 @@
 import tkinter as tk
+import math
 
 main = tk.Tk()
 
@@ -12,10 +13,10 @@ class CalculatorGUI:
         main.mainloop()
 
     def init_buttons(self):
-        tk.Button(main, text="x2", width=7).grid(row=1, column=0)
-        tk.Button(main, text="root", width=7).grid(row=1, column=1)
-        tk.Button(main, text="%", width=7).grid(row=1, column=2)
-        tk.Button(main, text="1/x", width=7).grid(row=1, column=3)
+        tk.Button(main, text="x2", width=7, command=self.square).grid(row=1, column=0)
+        tk.Button(main, text="root", width=7, command=self.sqroot).grid(row=1, column=1)
+        tk.Button(main, text="%", width=7, command=self.percentage).grid(row=1, column=2)
+        tk.Button(main, text="1/x", width=7, command=self.kehrwert).grid(row=1, column=3)
         tk.Button(main, text="(", width=7, command=lambda: self.writetoentry("(")).grid(row=1, column=4)
         tk.Button(main, text=")", width=7, command=lambda: self.writetoentry(")")).grid(row=1, column=5)
         tk.Button(main, text="+", width=7, command=lambda: self.writetoentry("+")).grid(row=2, column=3)
@@ -50,15 +51,42 @@ class CalculatorGUI:
     def calculatetext(self):
         result = self.entry.get()
         self.entry.delete(0, tk.END)
-        self.entry.insert(0, eval(result))
-        print(result)
-        return
+        try:
+            self.entry.insert(0, eval(result))
+        except SyntaxError:
+            self.entry.insert(0, "Wrong Syntax, please us a correct mathematical notation")
+
+    def square(self):
+        number = self.entry.get()
+        numberconverted = float(number)
+        self.entry.delete(0, tk.END)
+        squareresult = numberconverted * numberconverted
+        self.entry.insert(0, str(squareresult))
+
+    def sqroot(self):
+        number = self.entry.get()
+        numconverted = float(number)
+        self.entry.delete(0, tk.END)
+        sqr = math.sqrt(numconverted)
+        self.entry.insert(0, str(sqr))
+
+    def kehrwert(self):
+        number = self.entry.get()
+        numconverted = float(number)
+        self.entry.delete(0, tk.END)
+        kehrwert = 1 / numconverted
+        self.entry.insert(0, str(kehrwert))
+
+    def percentage(self):
+        numbers = self.entry.get()
+        numarray = numbers.split(" ")
+        num1 = float(numarray[0])
+        num2 = float(numarray[1])
+
+        self.entry.delete(0, tk.END)
+        percentage = (num1 / num2) * 100
+        self.entry.insert(0, str(percentage) + "%")
 
 
 if __name__ == "__main__":
     calc = CalculatorGUI()
-
-
-
-
-
