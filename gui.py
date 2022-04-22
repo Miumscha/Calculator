@@ -7,16 +7,17 @@ main = tk.Tk()
 class CalculatorGUI:
 
     def __init__(self):
-        self.entry = tk.Entry(main, bg="#FFFFFF", bd=5, relief="sunken")
+        self.entry = tk.Entry(main, bg="#b1e8ee", bd=5, relief="sunken")
         self.entry.grid(row=0, column=0, columnspan=6, sticky="we")
         self.init_buttons()
+        main.configure(background='light blue')
         main.mainloop()
 
     def init_buttons(self):
-        tk.Button(main, text="x2", width=7, command=self.square).grid(row=1, column=0)
-        tk.Button(main, text="root", width=7, command=self.sqroot).grid(row=1, column=1)
-        tk.Button(main, text="%", width=7, command=self.percentage).grid(row=1, column=2)
-        tk.Button(main, text="1/x", width=7, command=self.kehrwert).grid(row=1, column=3)
+        tk.Button(main, text="x2", width=7, command=self.square, bg="light green").grid(row=1, column=0)
+        tk.Button(main, text="root", width=7, command=self.sqroot, bg="light green").grid(row=1, column=1)
+        tk.Button(main, text="%", width=7, command=self.percentage, bg="light green").grid(row=1, column=2)
+        tk.Button(main, text="1/x", width=7, command=self.kehrwert, bg="light green").grid(row=1, column=3)
         tk.Button(main, text="(", width=7, command=lambda: self.writetoentry("(")).grid(row=1, column=4)
         tk.Button(main, text=")", width=7, command=lambda: self.writetoentry(")")).grid(row=1, column=5)
         tk.Button(main, text="+", width=7, command=lambda: self.writetoentry("+")).grid(row=2, column=3)
@@ -33,10 +34,10 @@ class CalculatorGUI:
         tk.Button(main, text="9", width=7, command=lambda: self.writetoentry("9")).grid(row=4, column=2)
         tk.Button(main, text="/", width=7, command=lambda: self.writetoentry("/")).grid(row=5, column=3)
         tk.Button(main, text=".", width=7, command=lambda: self.writetoentry(".")).grid(row=5, column=0)
-        tk.Button(main, text="clear", width=7, command=self.clear).grid(row=5, column=1)
+        tk.Button(main, text="clear", width=7, command=self.clear, bg="grey").grid(row=5, column=1)
         tk.Button(main, text="0", width=7, command=lambda: self.writetoentry("0")).grid(row=5, column=2)
-        tk.Button(main, text="ce", width=7, command=self.clearelement).grid(row=5, column=4)
-        tk.Button(main, text="=", width=7, command=self.calculatetext).grid(row=5, column=5)
+        tk.Button(main, text="ce", width=7, command=self.clearelement, bg="grey").grid(row=5, column=4)
+        tk.Button(main, text="=", width=7, command=self.calculatetext, bg="grey").grid(row=5, column=5)
 
     def clear(self):
         self.entry.delete(0, tk.END)
